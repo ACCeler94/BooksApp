@@ -22,25 +22,27 @@ const render = () => {
   }
 };
 
+
+
 const initActions = () => {
-  const covers = document.querySelectorAll(`${select.containerOf.booksList} ${select.book.image}`);
-  covers.forEach(cover => {
-    cover.addEventListener('dblclick', event => {
+  const booksList = document.querySelector(select.containerOf.booksList);
+  booksList.addEventListener('dblclick', event => {
+    if (event.target.offsetParent.classList.contains('book__image')) {
       event.preventDefault();
-      const coverId = cover.getAttribute('data-id');
+      const parent = event.target.offsetParent;
+      const coverId = parent.getAttribute('data-id');
 
       if (favoriteBooks.indexOf(coverId) === -1) {
-        cover.classList.add('favorite');
+        parent.classList.add('favorite');
         favoriteBooks.push(coverId);
       } else {
         favoriteBooks = favoriteBooks.filter(id => id !== coverId);
-        cover.classList.remove('favorite');
+        parent.classList.remove('favorite');
       }
       console.log(favoriteBooks);
-    });
+    }
   });
 };
-
 
 render();
 initActions();

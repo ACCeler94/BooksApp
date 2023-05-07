@@ -31,7 +31,7 @@ dataSource.books = [
     rating: 7.8,
     details: {
       adults: false,
-      nonFiction: true
+      nonFiction: true,
     }
   },
   {

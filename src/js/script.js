@@ -16,13 +16,15 @@ class BooksList {
 
     this.favoriteBooks = [];
     this.filters = [];
+    this.dom = {};
 
 
 
     this.initData();
     this.render();
-    //this.getElements();
+    this.getElements();
     this.initActions();
+    console.log('dom object', this.dom);
 
   }
 
@@ -30,17 +32,13 @@ class BooksList {
     this.data = dataSource.books;
   }
 
-  /* getElements() {
-
-    this.dom = {};
+  getElements() {
 
     this.dom.bookTemplate = document.querySelector(select.templateOf.book);
     this.dom.booksList = document.querySelector(select.containerOf.booksList);
-    this.dom.filtersContainer = document.querySelector(this.dom.containerOf.filters);
+    this.dom.filtersContainer = document.querySelector(select.containerOf.filters);
 
-    console.log(this.dom.bookTemplate);
-    console.log(this.dom.booksList);
-  } */
+  }
 
   render() {
     for (const book of this.data) {
@@ -59,7 +57,7 @@ class BooksList {
   }
 
   initActions() {
-    const booksList = document.querySelector(select.containerOf.booksList);
+    const booksList = this.dom.booksList;
     booksList.addEventListener('dblclick', event => {
       if (event.target.offsetParent.classList.contains('book__image')) {
         event.preventDefault();
@@ -77,7 +75,7 @@ class BooksList {
       }
     });
 
-    const filtersForm = document.querySelector(select.containerOf.filters);
+    const filtersForm = this.dom.filtersContainer;
     filtersForm.addEventListener('click', event => {
       if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox' && event.target.name === 'filter') {
         if (event.target.checked) {
